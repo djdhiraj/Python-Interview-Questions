@@ -1,7 +1,7 @@
 # Python-Interview-Questions
 * Logger.info(msg) : This will log a message with level INFO on this logger.
 * Logger.warning(msg) : This will log a message with level WARNING on this logger.
-Logger.error(msg) : This will log a message with level ERROR on this logger.
+# Logger.error(msg) : This will log a message with level ERROR on this logger.
 Logger.critical(msg) : This will log a message with level CRITICAL on this logger.
 Logger.log(lvl,msg) : This will Logs a message with integer level lvl on this logger.
 Logger.exception(msg) : This will log a message with level ERROR on this logger.
