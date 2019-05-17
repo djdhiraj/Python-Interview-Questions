@@ -10,7 +10,9 @@ cur1.execute("SELECT COUNT(*) from information_schema.tables where table_schema 
 cur1.execute("SELECT * FROM information_schema.tables WHERE table_schema ='rastey';")
 cur1.execute("SELECT *  from information_schema.tables where table_schema = 'rastey'")
 cur.execute("SELECT * from vendor_users_log")
-
+columns = cur.description
+results = [{columns[index][0]: column for index, column in enumerate(value)} for value in cur.fetchall()]
+cur.close()
 
 
 
