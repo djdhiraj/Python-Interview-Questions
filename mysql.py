@@ -8,6 +8,11 @@ print(cur1)
     ...:     
 cur1.execute("SELECT COUNT(*) from information_schema.tables where table_schema = 'rastey'")
 cur1.execute("SELECT * FROM information_schema.tables WHERE table_schema ='rastey';")
+cur1.execute("SELECT *  from information_schema.tables where table_schema = 'rastey'")
+cur.execute("SELECT * from vendor_users_log")
+
+
+
 
 myresult = cur1.fetchall()
 # commit after create, update, and delete tables in database
