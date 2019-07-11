@@ -344,4 +344,27 @@ ON w.animal_id = same.animal_id
 
 
 
-
+set @startdate = cast('2018-01-17' as datetime);
+set @enddate = cast('2019-01-17' as datetime);
+set @word = 'ZENGA MEDIA';
+SELECT 
+		cinvoice.id, cinvoice.cp_user_id, cinvoice.duty_ids, cinvoice.payment_status, cinvoice.baseamount, cinvoice.totalamount, cinvoice.paidamount, cinvoice.dueamount, cinvoice.invoice, cinvoice.invoice_status, 
+        cinvoice.igst, cinvoice.cgst, cinvoice.sgst, Date(cinvoice.created_date) as created_date,
+        cu.cp_company_name,cu.cp_contact_person_name,cu.cp_contact_person_mobile,
+        istatus.invoice_status_name,cinvoice.no_of_duties,cinvoice.comment
+	FROM 
+		rastey.corporate_invoice cinvoice
+        left join rastey.corporate_users cu on cu.cp_user_id = cinvoice.cp_user_id
+		left join rastey.invoice_status istatus on istatus.invoice_status_id = cinvoice.invoice_status
+    where 
+    ((cinvoice.created_date) between @startdate and DATE_ADD(@enddate, INTERVAL 1 DAY))
+    and (
+		cinvoice.id like CONCAT('%',@word,'%') 
+        or cinvoice.cp_user_id like CONCAT('%',@word,'%')
+        or cinvoice.payment_status like CONCAT('%',@word,'%')
+        or istatus.invoice_status_name like CONCAT('%',@word,'%')
+        or cinvoice.invoice_status like CONCAT('%',@word,'%')
+        or cinvoice.duty_ids like CONCAT('%',@word,'%')
+        or cu.cp_company_name like CONCAT('%',@word,'%')
+        or cinvoice.booking_ids like CONCAT('%',@word,'%'))
+	ORDER BY  cinvoice.created_date desc;
